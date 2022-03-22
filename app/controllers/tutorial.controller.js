@@ -1,4 +1,5 @@
 const db = require("../models");
+const {createTutorial} = require("../services/tutorial.service");
 const Tutorial = db.tutorials;
 const Op = db.Sequelize.Op;
 
@@ -11,22 +12,15 @@ exports.create = (req, res) => {
     return;
   }
 
-  const tutorial = {
-    title: req.body.title,
-    description: req.body.description,
-    published: req.body.published ? req.body.published : false
-  };
-
-  Tutorial.create(tutorial)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Tutorial."
+  createTutorial.then(data => {
+    res.send(data);
+  })
+      .catch(err => {
+        res.status(500).send({
+          message:
+              err.message || "Some error occurred while creating the Tutorial."
+        });
       });
-    });
 };
 
 exports.findAll = (req, res) => {

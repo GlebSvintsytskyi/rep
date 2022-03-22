@@ -1,5 +1,7 @@
+require('dotenv').config()
+
 module.exports = {
-    HOST: "localhost",
+    HOST: process.env.HOST,
     USER: "root",
     PASSWORD: "123456",
     DB: "testdb",
